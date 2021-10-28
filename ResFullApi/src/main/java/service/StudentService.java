@@ -2,7 +2,10 @@ package service;
 
 import dto.StudentDTO;
 import entity.Student;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import repository.StudentDAO;
+import utils.HibernateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -112,4 +115,7 @@ public class StudentService {
         return studentDAO.updateStudent(student);
 
     }
+public boolean delete(int id){
+return studentDAO.deleteStudent(id);
+}
 }

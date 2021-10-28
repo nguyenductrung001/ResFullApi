@@ -58,4 +58,20 @@ public class StudentDAO {
         }
         return  false;
     }
+    public boolean deleteStudent(int id){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            StudentDTO studentDTO = session.load(StudentDTO.class, id);
+            session.delete(studentDTO);
+            session.getTransaction().commit();
+            return true;
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return false;
+    }
 }

@@ -26,7 +26,7 @@ public class StudentController {
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addNewTeacher(StudentDTO studentDTO){
+    public String addNewStudent(StudentDTO studentDTO){
 //        ObjectMapper mapper = new ObjectMapper();
 //        Student student = mapper.convertValue(jsonNode, Student.class);
         return studentService.insert(studentDTO) ? "Thêm mới thành công" : "Thêm mới thất bại";
@@ -34,8 +34,15 @@ public class StudentController {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String UpdateTeacher(StudentDTO studentDTO){
+    public String UpdateStudent(StudentDTO studentDTO){
         return studentService.update(studentDTO) ? "update thanh cong" : "update that bai";
+    }
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String Delete(@PathParam("id") int id){
+        return studentService.delete(id) ? "delete thanh cong" : "delete that bai";
     }
 
 }

@@ -4,13 +4,14 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 @Data
 @Entity(name = "STUDENTS")
 @NoArgsConstructor
 @AllArgsConstructor
-//@XmlRootElement
+@XmlRootElement
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Student {
     @Id

@@ -2,10 +2,7 @@ package service;
 
 import dto.StudentDTO;
 import entity.Student;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import repository.StudentDAO;
-import utils.HibernateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +15,7 @@ public class StudentService {
 
 
 
-    public List<StudentDTO> getListStudent(){
+    public List<Student> getListStudent(){
         return studentDAO.getAllStudent();
     }
 
@@ -49,7 +46,7 @@ public class StudentService {
             return false;
         }
         if (student.getClassName() == null) {
-            System.out.println("Ban phai nhap ngay lop hoc!");
+            System.out.println("Ban phai nhap  lop hoc!");
             return false;
         }
         if (student.getMaJor() == null) {
@@ -93,23 +90,32 @@ public class StudentService {
         }
         if (student.getFullName() == null) {
             return false;
+        }else if (student.getFullName().length()>50){
+            System.out.println("FullName khong duoc vượt quá 50 kí tự");
+            return false;
         }
         if (student.getBirthDay() == null){
+            System.out.println("Ban pahi nhap ngay sinh!");
             return false;
         }
         if (student.getClassName() == null){
+            System.out.println("Ban phai nhap ten lop hoc!");
             return false;
         }
         if (student.getMaJor() == null){
+            System.out.println("Ban pahi nhap khoa!");
             return false;
         }
         if (student.getHomeTown() == null){
+            System.out.println("Ban pahi nhap dia chi!");
             return false;
         }
         if (student.getGender() == null){
+            System.out.println("Ban pahi nhap gioi tinh!");
             return false;
         }
         if (student.getAverageMark() == null){
+            System.out.println("Ban pahi nhap diem trung binh!");
             return false;
         }
         return studentDAO.updateStudent(student);
@@ -118,4 +124,25 @@ public class StudentService {
 public boolean delete(int id){
 return studentDAO.deleteStudent(id);
 }
+public List<Student> getListStudentBirthday(){
+        return studentDAO.cmSinhNhat();
+}
+    public List<Student> getListStudentByName(String name){
+        return studentDAO.searchFullName(name);
+    }
+    public List<Student> getListStudentByMajor(String major){
+        return studentDAO.searchMajor(major);
+    }
+    public List<Student> getListStudentByGender(String gender){
+        return studentDAO.searchGender(gender);
+    }
+    public List<Student> getListStudentByHometown(String hometown){
+        return studentDAO.searchHometown(hometown);
+    }
+    public List<Student> getListStudentByClassName(String className){
+        return studentDAO.searchClassName(className);
+    }
+    public List<Student> getListStudentAverageMark(double min , double max){
+        return studentDAO.getStudentByAverage(min,max);
+    }
 }
